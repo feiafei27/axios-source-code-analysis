@@ -6,11 +6,9 @@ module.exports = function(grunt) {
     meta: {
       banner: '/* <%= pkg.name %> v<%= pkg.version %> | (c) <%= grunt.template.today("yyyy") %> by Matt Zabriskie */\n'
     },
-
     clean: {
       dist: 'dist/**'
     },
-
     ts: {
       test: {
         options: {
@@ -23,7 +21,6 @@ module.exports = function(grunt) {
         src: ['typings/index.d.ts', 'test/typescript/*.ts']
       }
     },
-
     package2bower: {
       all: {
         fields: [
@@ -36,7 +33,6 @@ module.exports = function(grunt) {
         ]
       }
     },
-
     usebanner: {
       all: {
         options: {
@@ -48,11 +44,9 @@ module.exports = function(grunt) {
         }
       }
     },
-
     eslint: {
       target: ['lib/**/*.js']
     },
-
     karma: {
       options: {
         configFile: 'karma.conf.js'
@@ -64,7 +58,6 @@ module.exports = function(grunt) {
         singleRun: false
       }
     },
-
     mochaTest: {
       test: {
         src: ['test/unit/**/*.js']
@@ -73,7 +66,6 @@ module.exports = function(grunt) {
         timeout: 30000,
       },
     },
-
     watch: {
       build: {
         files: ['lib/**/*.js'],
@@ -84,7 +76,6 @@ module.exports = function(grunt) {
         tasks: ['test']
       }
     },
-
     webpack: require('./webpack.config.js')
   });
 
@@ -101,7 +92,7 @@ module.exports = function(grunt) {
     grunt.file.write('bower.json', JSON.stringify(bower, null, 2));
   });
 
-  grunt.registerTask('test', 'Run the jasmine and mocha tests', ['eslint', 'mochaTest', 'karma:single', 'ts']);
+  grunt.registerTask('test', 'Run the jasmine and mocha tests', ['mochaTest', 'karma:single', 'ts']);
   grunt.registerTask('build', 'Run webpack and bundle the source', ['clean', 'webpack']);
   grunt.registerTask('version', 'Sync version info for a release', ['usebanner', 'package2bower']);
 };
